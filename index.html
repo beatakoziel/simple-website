@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PŚK</title>
+    <link rel="stylesheet" href="webpage_style.css">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Raleway&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script src="CustomCounter.js"></script>
+    <script>
+        var counter;
+
+        $(function () {
+            RefreshCode();
+        })
+
+        function RefreshCode() {
+            var counter = Cookies.get('counter');
+            if (!counter) {
+                Cookies.set('counter', 1);
+            } else {
+                ++counter;
+                Cookies.remove('counter');
+                Cookies.set('counter', counter);
+            }
+            document.getElementById("counter").innerHTML = Cookies.get('counter');
+            console.log(Cookies.get('counter'));
+        }
+
+        function currentTime() {
+            var date = new Date();
+            var hour = date.getHours();
+            var min = date.getMinutes();
+            var sec = date.getSeconds();
+            min = checkTime(min);
+            sec = checkTime(sec);
+            document.getElementById("clock").innerHTML = hour + ":" + min + ":" + sec;
+            var t = setTimeout(currentTime, 500);
+        }
+
+        function checkTime(i) {
+            if (i < 10) {
+                i = "0" + i
+            };
+            return i;
+        }
+
+        function validate() {
+            var number = document.forms["numberForm"]["number"].value;
+            if (number == "") {
+                document.getElementById("response").innerHTML = "Number is required.";
+            } else if (number > 0 && number < 11) {
+                document.getElementById("response").innerHTML = "Valid number.";
+            } else document.getElementById("response").innerHTML = "Not a valid number.";
+        }
+        currentTime();
+    </script>
+</head>
+
+<body>
+    <header onclick="window.location.href = 'index.html'">
+    </header>
+
+    <aside>
+        <nav>
+            <a>1st position</a></br>
+            <a>2nd position</a></br>
+            <a>3rd position</a></br>
+            <a>4th position</a></br>
+            <a>5th position</a></br>
+            <a>7th position</a></br>
+        </nav>
+        <div id="content">
+            <div>
+                <p>Sample content</p>
+                I must explain to you how all this mistaken idea of denouncing pleasure and praising pain
+                was born and I will give you a complete account of the system,
+                and expound the actual teachings of the great explorer of the truth,
+                the master-builder of human happiness.
+                No one rejects, dislikes, or avoids pleasure itself,
+                because it is pleasure, but because those who do not know how to pursue pleasure rationally
+                encounter consequences that are extremely painful.
+                Nor again is there anyone who loves or pursues or desires to obtain pain of itself,
+                because it is pain, but because occasionally circumstances occur
+                in which toil and pain can procure him some great pleasure.
+                To take a trivial example, which of us ever undertakes laborious physical exercise,
+                except to obtain some advantage from it?
+            </div>
+            <div>
+                <p>Sample table</p>
+                <table>
+                    <tr>
+                        <td>George Bernard Shaw</td>
+                        <td>
+                            "Life isn't about finding yourself.
+                            Life is about creating yourself."
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Abraham Lincoln</td>
+                        <td>
+                            "And in the end, it's not the years in your life that count.
+                            It's the life in your years."
+                        </td>
+                    </tr>
+                </table>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/VopyGpEhlQ0" frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+                <p>Sample list</p>
+                <ul>
+                    <li>1st position</li>
+                    <li>2nd position</li>
+                    <li>3rd position</li>
+                </ul>
+                <p>Sample list</p>
+                <ol>
+                    <li>1st position</li>
+                    <li>2nd position</li>
+                    <li>3rd position</li>
+                </ol>
+
+                <p>Form</p>
+                <form name="numberForm">
+                    Please enter number between 1 to 10:
+                    <input id="number" type="number" required>
+                    <button type="button" onclick="validate()">OK</button>
+                </form>
+                <p id="response"></p>
+            </div>
+        </div>
+
+    </aside>
+    <footer>
+        <p>Beata Kozieł 3ID11A Copyright ©</p>
+        Clock:
+        <p id="clock"></p>
+        Website counter:
+        <p id="counter"></p>
+    </footer>
+</body>
+
+</html>
